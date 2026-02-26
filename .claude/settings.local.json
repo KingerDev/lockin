@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(source:*)",
+      "Bash(nvm use:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(perl -pi -e:*)"
+    ]
+  }
+}

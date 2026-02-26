@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Laravel",
+      "runtimeExecutable": "/opt/homebrew/Cellar/php/8.4.3/bin/php",
+      "runtimeArgs": ["artisan", "serve"],
+      "port": 8000,
+      "autoPort": true
+    },
+    {
+      "name": "Vite",
+      "runtimeExecutable": "/Users/martinbalaz/.nvm/versions/node/v22.16.0/bin/node",
+      "runtimeArgs": ["node_modules/.bin/vite"],
+      "port": 5173
+    }
+  ]
+}
