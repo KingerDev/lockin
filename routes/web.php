@@ -92,7 +92,7 @@ $products = [
             ['qty' => 20, 'price' => 14.90, 'price_per' => '€0.75/pc', 'badge' => null],
             ['qty' => 50, 'price' => 29.90, 'price_per' => '€0.60/pc', 'badge' => 'Best Value'],
         ],
-        'others' => ['capsules', 'sticks'],
+        'others' => ['capsules', 'sticks', 'gum'],
     ],
 
     'capsules' => [
@@ -177,7 +177,7 @@ $products = [
             ['qty' => 90,  'price' => 32.90, 'price_per' => '€0.37/tab', 'badge' => 'Popular'],
             ['qty' => 120, 'price' => 39.90, 'price_per' => '€0.33/tab', 'badge' => 'Best Value'],
         ],
-        'others' => ['gummies', 'sticks'],
+        'others' => ['gummies', 'sticks', 'gum'],
     ],
 
     'sticks' => [
@@ -261,7 +261,91 @@ $products = [
             ['qty' => 30, 'price' => 19.90, 'price_per' => '€0.66/pc', 'badge' => null],
             ['qty' => 60, 'price' => 34.90, 'price_per' => '€0.58/pc', 'badge' => 'Best Value'],
         ],
-        'others' => ['gummies', 'capsules'],
+        'others' => ['gummies', 'capsules', 'gum'],
+    ],
+
+    'gum' => [
+        'slug'        => 'gum',
+        'name'        => 'Focus Gum',
+        'tagline'     => 'Chew Your Way to Focus',
+        'description' => 'Precision-dosed nootropic chewing gum that delivers active compounds through the oral mucosa — faster absorption than any capsule, more convenient than any drink. One chew. Full focus.',
+        'color'       => '#00cc88',
+        'color_rgb'   => '0,204,136',
+        'image'       => '/images/products/gum.png',
+        'serving'     => '1–2 pieces per session',
+        'timing'      => '5–10 minutes before your focus session',
+        'number'      => '04',
+        'ingredients' => [
+            [
+                'name'    => 'Caffeine',
+                'dose'    => '50mg',
+                'benefit' => 'Clean energy via buccal absorption',
+                'science' => 'Caffeine absorbed through the oral mucosa enters the bloodstream significantly faster than swallowed capsules — peak effect in under 10 minutes. At 50mg per piece, it delivers a precise, controllable energy dose without the spike-and-crash of a full cup of coffee.',
+            ],
+            [
+                'name'    => 'L-Theanine',
+                'dose'    => '100mg',
+                'benefit' => 'Calm focus, no jitters',
+                'science' => 'The amino acid found in green tea pairs synergistically with caffeine at a 2:1 ratio. L-Theanine increases alpha-wave brain activity, eliminating caffeine-induced anxiety while amplifying and extending the focus effect. The gold standard nootropic duo.',
+            ],
+            [
+                'name'    => 'Peppermint Oil',
+                'dose'    => '50mg',
+                'benefit' => 'Alertness & working memory enhancement',
+                'science' => 'Multiple peer-reviewed studies confirm that peppermint aroma and ingestion significantly enhance alertness, memory, and sustained attention. The menthol compound activates TRPM8 receptors, producing a measurable cognitive boost within minutes.',
+            ],
+            [
+                'name'    => 'Vitamin B6',
+                'dose'    => '2mg',
+                'benefit' => 'Neurotransmitter synthesis support',
+                'science' => 'Vitamin B6 (pyridoxine) is a critical cofactor in the synthesis of serotonin, dopamine, and GABA — the primary neurotransmitters governing mood, motivation, and focused attention. Optimal B6 levels ensure your brain has the building blocks for peak neurochemical function.',
+            ],
+        ],
+        'benefits' => [
+            [
+                'icon'  => '<svg viewBox="0 0 48 48" fill="none"><path d="M8 40 L12 20 L20 32 L24 8 L28 28 L34 18 L40 40" stroke="#00cc88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="8" r="3" fill="rgba(0,204,136,0.25)" stroke="#00cc88" stroke-width="1.5"/></svg>',
+                'title' => 'Fastest Absorption',
+                'desc'  => 'Oral mucosa delivery bypasses the digestive system entirely — actives reach your bloodstream in under 10 minutes, faster than any pill or drink.',
+            ],
+            [
+                'icon'  => '<svg viewBox="0 0 48 48" fill="none"><rect x="14" y="10" width="20" height="28" rx="6" stroke="#00cc88" stroke-width="1.5" fill="rgba(0,204,136,0.06)"/><path d="M20 10 L20 6 M28 10 L28 6" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><path d="M19 24 L22 27 L29 20" stroke="#00cc88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                'title' => 'Portable & Discreet',
+                'desc'  => 'No water, no mixing, no prep. Pop a piece in your pocket and take it anywhere — meetings, flights, study halls, gym.',
+            ],
+            [
+                'icon'  => '<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" stroke="#00cc88" stroke-width="1.5"/><path d="M17 24h6l3-6 3 12 3-6h3" stroke="#00cc88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                'title' => 'Validated Combo',
+                'desc'  => 'Caffeine + L-Theanine at a 1:2 ratio is the most replicated nootropic combination in clinical research. Clean energy, zero crash, no anxiety.',
+            ],
+        ],
+        'reviews' => [
+            [
+                'name'     => 'Tom B.',
+                'role'     => 'Software Engineer',
+                'initials' => 'TB',
+                'gradient' => 'linear-gradient(135deg,#00cc88,#00d4ff)',
+                'text'     => 'No jitters, no crash. Two pieces and I\'m locked in for hours. I keep a pack in my desk drawer — it\'s become my go-to before any deep coding session.',
+            ],
+            [
+                'name'     => 'Nina H.',
+                'role'     => 'Student',
+                'initials' => 'NH',
+                'gradient' => 'linear-gradient(135deg,#00d4ff,#00cc88)',
+                'text'     => 'One piece before every study session. Focus kicks in within minutes and the mint keeps me alert without feeling wired. Finally something that actually works on exam days.',
+            ],
+            [
+                'name'     => 'Marco S.',
+                'role'     => 'Creative Director',
+                'initials' => 'MS',
+                'gradient' => 'linear-gradient(135deg,#9b59ff,#00cc88)',
+                'text'     => 'Better than my pre-meeting coffee. Discreet enough to use in client presentations — nobody knows you\'re nootropic-boosted. The clarity is noticeably different.',
+            ],
+        ],
+        'packs' => [
+            ['qty' => 10, 'price' =>  9.90, 'price_per' => '€0.99/pc', 'badge' => null],
+            ['qty' => 40, 'price' => 29.90, 'price_per' => '€0.75/pc', 'badge' => 'Best Value'],
+        ],
+        'others' => ['gummies', 'capsules', 'sticks'],
     ],
 
 ];
@@ -269,3 +353,4 @@ $products = [
 Route::get('/gummies',  fn() => view('product', $products['gummies']));
 Route::get('/capsules', fn() => view('product', $products['capsules']));
 Route::get('/sticks',   fn() => view('product', $products['sticks']));
+Route::get('/gum',      fn() => view('product', $products['gum']));

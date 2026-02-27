@@ -6,7 +6,9 @@
       "Bash(source:*)",
       "Bash(nvm use:*)",
       "mcp__Claude_Preview__preview_start",
-      "Bash(perl -pi -e:*)"
+      "Bash(perl -pi -e:*)",
+      "Bash(php:*)",
+      "Bash(/opt/homebrew/Cellar/php/8.4.3/bin/php:*)"
     ]
   }
 }

@@ -244,6 +244,50 @@
 </div>
 <div class="neon-divider" style="opacity:1;transform:scaleX(1);"></div>
 
+@elseif($slug === 'gum')
+{{-- ══════════════════════════════ GUM SHOWCASE — pinned piece-pops-out animation ══════════════════════════════ --}}
+<div id="pd-showcase" data-product="gum">
+    <section class="product-scene" id="pd-showcase-scene" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+
+        <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(0,204,136,0.10) 0%,transparent 70%);top:-10%;left:50%;transform:translateX(-50%);animation:float-orb 18s ease-in-out infinite;pointer-events:none;"></div>
+
+        <div class="gummy-layout" style="position:relative;z-index:1;width:100%;max-width:860px;padding:4rem 1.5rem;">
+
+            <div class="gummy-header">
+                <span class="section-label" style="display:block;margin-bottom:1rem;">Inside the Formula</span>
+                <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.02em;text-align:center;">
+                    What's <span style="background:linear-gradient(90deg,#00cc88,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">inside</span>
+                </h2>
+            </div>
+
+            <div class="gummy-stage">
+                <img id="gu-pack"  src="/images/products/gum.png"       alt="LockIn Focus Gum pack" class="gummy-stage__img">
+                <img id="gu-piece" src="/images/products/gum-piece.png" alt="Gum piece" class="gummy-stage__img gummy-stage__bear" onerror="this.style.display='none'">
+
+                <svg class="gummy-annotations" viewBox="0 0 700 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line class="ann-line" x1="315" y1="188" x2="68"  y2="52"/>
+                    <line class="ann-line" x1="385" y1="188" x2="632" y2="52"/>
+                    <line class="ann-line" x1="315" y1="255" x2="68"  y2="392"/>
+                    <line class="ann-line" x1="385" y1="255" x2="632" y2="392"/>
+                    <circle class="ann-dot" cx="68"  cy="52"  r="3.5"/>
+                    <circle class="ann-dot" cx="632" cy="52"  r="3.5"/>
+                    <circle class="ann-dot" cx="68"  cy="392" r="3.5"/>
+                    <circle class="ann-dot" cx="632" cy="392" r="3.5"/>
+                </svg>
+
+                <div class="ann-label ann-tl"><span class="ann-name">Caffeine</span><span class="ann-dose">50mg</span></div>
+                <div class="ann-label ann-tr"><span class="ann-name">L-Theanine</span><span class="ann-dose">100mg</span></div>
+                <div class="ann-label ann-bl"><span class="ann-name">Peppermint Oil</span><span class="ann-dose">50mg</span></div>
+                <div class="ann-label ann-br"><span class="ann-name">Vitamin B6</span><span class="ann-dose">2mg</span></div>
+            </div>
+
+            <p class="gummy-scroll-hint">Scroll to reveal the formula</p>
+
+        </div>
+    </section>
+</div>
+<div class="neon-divider" style="opacity:1;transform:scaleX(1);"></div>
+
 @endif
 
 {{-- ═══════════════════════════════════════ INGREDIENTS ═══════════════════════════════════════ --}}
@@ -314,6 +358,8 @@
                 <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;">With What</h3>
                 @if($slug === 'sticks')
                 <p style="font-size:0.9rem;color:var(--c-text-45);line-height:1.6;">Mix with 250–350ml of cold water. Shake or stir until fully dissolved.</p>
+                @elseif($slug === 'gum')
+                <p style="font-size:0.9rem;color:var(--c-text-45);line-height:1.6;">No water needed. Chew steadily for 10–15 minutes. Best on an empty stomach for maximum buccal absorption.</p>
                 @else
                 <p style="font-size:0.9rem;color:var(--c-text-45);line-height:1.6;">Take with a full glass of water. Can be taken with or without food.</p>
                 @endif
@@ -330,6 +376,8 @@
                 <p style="font-size:0.88rem;color:var(--c-text-50);line-height:1.6;">Stack with a Flow Stick on high-demand days for amplified focus. The Lion's Mane in both products compounds its neuroplasticity benefits over time.</p>
                 @elseif($slug === 'capsules')
                 <p style="font-size:0.88rem;color:var(--c-text-50);line-height:1.6;">Bacopa Monnieri takes 4–6 weeks to reach full effect. Take consistently every morning for best results. Bacopa is fat-soluble — taking with food improves absorption.</p>
+                @elseif($slug === 'gum')
+                <p style="font-size:0.88rem;color:var(--c-text-50);line-height:1.6;">Effects kick in within 5–10 minutes — much faster than swallowed capsules. Pair with a glass of water. Avoid taking after 4pm if you're caffeine-sensitive. One piece is ideal for shorter sessions; two pieces for deep work sprints.</p>
                 @else
                 <p style="font-size:0.88rem;color:var(--c-text-50);line-height:1.6;">Avoid taking Flow Sticks after 3pm if you're sensitive to caffeine. For maximum effect, avoid food 30 minutes before and after mixing your stick.</p>
                 @endif
@@ -414,13 +462,14 @@
             </h2>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:720px;margin:0 auto;" class="pd-crosssell-grid">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1000px;margin:0 auto;" class="pd-crosssell-grid">
 
             @php
                 $otherProducts = [
-                    'gummies'  => ['name' => 'Focus Gummies', 'subtitle' => 'Focus Fuel in Every Bite', 'number' => '01', 'color' => '#00d4ff'],
-                    'capsules' => ['name' => 'Daily Capsules', 'subtitle' => 'Long-Term Cognitive Foundation', 'number' => '02', 'color' => '#9b59ff'],
-                    'sticks'   => ['name' => 'Flow Sticks', 'subtitle' => 'On-Demand Performance', 'number' => '03', 'color' => '#00e5cc'],
+                    'gummies'  => ['name' => 'Focus Gummies', 'subtitle' => 'Focus Fuel in Every Bite',         'number' => '01', 'color' => '#00d4ff', 'color_rgb' => '0,212,255'],
+                    'capsules' => ['name' => 'Daily Capsules', 'subtitle' => 'Long-Term Cognitive Foundation',  'number' => '02', 'color' => '#9b59ff', 'color_rgb' => '155,89,255'],
+                    'sticks'   => ['name' => 'Flow Sticks',    'subtitle' => 'On-Demand Performance',           'number' => '03', 'color' => '#00e5cc', 'color_rgb' => '0,229,204'],
+                    'gum'      => ['name' => 'Focus Gum',      'subtitle' => 'Chew Your Way to Focus',          'number' => '04', 'color' => '#00cc88', 'color_rgb' => '0,204,136'],
                 ];
             @endphp
 
@@ -428,8 +477,8 @@
             @php $o = $otherProducts[$otherSlug]; @endphp
             <a href="/{{ $otherSlug }}" class="pd-crosssell-card">
                 <div style="position:relative;height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
-                    <div style="position:absolute;width:100%;height:100%;background:radial-gradient(circle,rgba({{ $loop->first ? '0,212,255' : '155,89,255' }},0.1) 0%,transparent 70%);filter:blur(20px);"></div>
-                    <img src="/images/products/{{ $otherSlug }}.png" alt="{{ $o['name'] }}" style="max-height:150px;max-width:100%;object-fit:contain;filter:drop-shadow(0 0 20px rgba({{ $loop->first ? '0,212,255' : '155,89,255' }},0.25));position:relative;z-index:1;transition:transform 0.3s;">
+                    <div style="position:absolute;width:100%;height:100%;background:radial-gradient(circle,rgba({{ $o['color_rgb'] }},0.1) 0%,transparent 70%);filter:blur(20px);"></div>
+                    <img src="/images/products/{{ $otherSlug }}.png" alt="{{ $o['name'] }}" style="max-height:150px;max-width:100%;object-fit:contain;filter:drop-shadow(0 0 20px rgba({{ $o['color_rgb'] }},0.25));position:relative;z-index:1;transition:transform 0.3s;">
                 </div>
                 <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:{{ $o['color'] }};margin-bottom:0.35rem;opacity:0.8;">{{ $o['number'] }}</div>
                 <div style="font-size:1.1rem;font-weight:700;margin-bottom:0.25rem;">{{ $o['name'] }}</div>

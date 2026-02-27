@@ -544,6 +544,17 @@ body {
     color: #00e5cc;
 }
 
+/* Gum showcase — mint green accent overrides */
+#pd-showcase[data-product="gum"] .ann-line {
+    stroke: rgba(0, 204, 136, 0.55);
+}
+#pd-showcase[data-product="gum"] .ann-dot {
+    fill: #00cc88;
+}
+#pd-showcase[data-product="gum"] .ann-dose {
+    color: #00cc88;
+}
+
 /* Mobile: simplified static layout */
 @media (max-width: 767px) {
     .gummy-stage {
@@ -791,14 +802,17 @@ html.light .gummy-scroll-hint { color: rgba(0, 0, 0, 0.45); }
 html.light .ann-line                                       { stroke: rgba(0,130,180,0.90); stroke-width: 1.5; }
 html.light #pd-showcase[data-product="capsules"] .ann-line { stroke: rgba(110,45,210,0.85); stroke-width: 1.5; }
 html.light #pd-showcase[data-product="sticks"] .ann-line   { stroke: rgba(0,155,135,0.85); stroke-width: 1.5; }
+html.light #pd-showcase[data-product="gum"] .ann-line      { stroke: rgba(0,160,100,0.85); stroke-width: 1.5; }
 
 html.light .ann-dot                                        { fill: #0099cc; }
 html.light #pd-showcase[data-product="capsules"] .ann-dot  { fill: #7b42e0; }
 html.light #pd-showcase[data-product="sticks"] .ann-dot    { fill: #009e90; }
+html.light #pd-showcase[data-product="gum"] .ann-dot       { fill: #00a864; }
 
 html.light .ann-dose                                       { color: #0099cc; }
 html.light #pd-showcase[data-product="capsules"] .ann-dose { color: #7b42e0; }
 html.light #pd-showcase[data-product="sticks"] .ann-dose   { color: #009e90; }
+html.light #pd-showcase[data-product="gum"] .ann-dose      { color: #00a864; }
 
 /* ── Hero orbs — boost visibility on light background ── */
 html.light .orb-1 { background: radial-gradient(circle, rgba(0,190,255,0.38) 0%, transparent 70%); }
@@ -1065,6 +1079,9 @@ html.light .nav-mobile-link { border-color: rgba(0,0,0,0.06); }
     .pack-option       { min-width: 70px; padding: 0.55rem 0.8rem; }
     .pack-price-amount { font-size: 1.6rem; }
 }
+
+/* ── Products grid: 2×2 on all desktop sizes ── */
+.products-grid { grid-template-columns: repeat(2,1fr) !important; }
 
 /* ── 641–900px tablet: 2-column grids ── */
 @media (min-width: 641px) and (max-width: 900px) {

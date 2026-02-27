@@ -119,11 +119,11 @@
                 The Complete <span class="gradient-text">Focus Stack</span>
             </h2>
             <p style="margin-top:1rem;color:var(--c-text-45);font-size:1rem;max-width:36rem;margin-left:auto;margin-right:auto;line-height:1.7;">
-                Three precision-formulated products. One unified mission: help you lock in and perform at your best.
+                Four precision-formulated products. One unified mission: help you lock in and perform at your best.
             </p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="products-grid">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="products-grid">
 
             <a href="/gummies" class="product-thumb">
                 <img src="/images/products/gummies.png" alt="LockIn Gummies">
@@ -149,6 +149,15 @@
                     <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#00d4ff;margin-bottom:0.4rem;font-weight:600;">03</div>
                     <div style="font-size:1.15rem;font-weight:700;margin-bottom:0.3rem;">Flow Sticks</div>
                     <div style="font-size:0.82rem;color:var(--c-text-40);">On-Demand Performance</div>
+                </div>
+            </a>
+
+            <a href="/gum" class="product-thumb" style="animation-delay:0.3s;">
+                <img src="/images/products/gum.png" alt="LockIn Focus Gum">
+                <div>
+                    <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#00cc88;margin-bottom:0.4rem;font-weight:600;">04</div>
+                    <div style="font-size:1.15rem;font-weight:700;margin-bottom:0.3rem;">Focus Gum</div>
+                    <div style="font-size:0.82rem;color:var(--c-text-40);">Chew Your Way to Focus</div>
                 </div>
             </a>
 
@@ -369,6 +378,77 @@
     </div>
 </div>
 
+<div class="neon-divider"></div>
+
+{{-- ═══════════════════════════════════════ FOCUS GUM — PINNED SECTION ═══════════════════════════════════════ --}}
+<div id="section-gum">
+    <div class="product-scene" id="gum-scene">
+        <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(0,204,136,0.08) 0%,transparent 70%);bottom:-10%;left:-5%;"></div>
+
+        <div class="product-layout reverse">
+            <!-- Info right (reversed layout) -->
+            <div class="product-info">
+                <div class="product-num" id="gum-num">04 / Focus Gum</div>
+                <h2 class="product-heading" id="gum-title">
+                    <span class="chrome-text">Focus</span> <span style="background:linear-gradient(90deg,#00cc88,#00d4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Gum</span>
+                </h2>
+                <p class="product-subheading" id="gum-subtitle">
+                    Fastest-acting nootropic in the stack.<br>
+                    No water. No prep. Just chew and lock in.
+                </p>
+
+                <div class="ingredients-grid" id="gum-ingredients">
+                    <div class="ingredient-card">
+                        <div class="ingredient-dot" style="background:linear-gradient(135deg,#00cc88,#00d4ff);"></div>
+                        <div class="ingredient-info">
+                            <span class="ingredient-name">Caffeine</span>
+                            <span class="ingredient-desc">Clean energy via buccal absorption</span>
+                        </div>
+                        <span class="ingredient-dose" style="color:#00cc88;">50mg</span>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-dot" style="background:linear-gradient(135deg,#00cc88,#00d4ff);"></div>
+                        <div class="ingredient-info">
+                            <span class="ingredient-name">L-Theanine</span>
+                            <span class="ingredient-desc">Calm focus, no jitters</span>
+                        </div>
+                        <span class="ingredient-dose" style="color:#00cc88;">100mg</span>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-dot" style="background:linear-gradient(135deg,#00cc88,#00d4ff);"></div>
+                        <div class="ingredient-info">
+                            <span class="ingredient-name">Peppermint Oil</span>
+                            <span class="ingredient-desc">Alertness & working memory boost</span>
+                        </div>
+                        <span class="ingredient-dose" style="color:#00cc88;">50mg</span>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-dot" style="background:linear-gradient(135deg,#00cc88,#00d4ff);"></div>
+                        <div class="ingredient-info">
+                            <span class="ingredient-name">Vitamin B6</span>
+                            <span class="ingredient-desc">Neurotransmitter synthesis support</span>
+                        </div>
+                        <span class="ingredient-dose" style="color:#00cc88;">2mg</span>
+                    </div>
+                </div>
+
+                <div id="gum-cta">
+                    <a href="/gum" class="cta-primary" style="display:inline-flex;background:linear-gradient(135deg,#00cc88,#00d4ff);">
+                        Shop Focus Gum
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left:4px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image left (reversed) -->
+            <div class="product-img-wrap">
+                <div class="product-img-glow" style="background:radial-gradient(circle,rgba(0,204,136,0.12) 0%,transparent 70%);"></div>
+                <img id="gum-img" src="/images/products/gum.png" alt="LockIn Focus Gum" class="product-img">
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- ═══════════════════════════════════════ BENEFITS ═══════════════════════════════════════ --}}
 <section id="benefits" style="position:relative;padding:8rem 1.5rem;z-index:1;">
     <div style="max-width:1200px;margin:0 auto;">
@@ -566,9 +646,10 @@
 
         <!-- Product showcase -->
         <div style="display:flex;align-items:flex-end;justify-content:center;gap:2rem;margin-top:4rem;" class="cta-products">
-            <img src="/images/products/gummies.png" alt="" style="height:140px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,212,255,0.3));opacity:0.85;transform:rotate(-5deg);">
-            <img src="/images/products/capsules.png" alt="" style="height:180px;object-fit:contain;filter:drop-shadow(0 0 25px rgba(155,89,255,0.3));opacity:0.95;">
-            <img src="/images/products/sticks.png" alt="" style="height:140px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,229,204,0.3));opacity:0.85;transform:rotate(5deg);">
+            <img src="/images/products/gummies.png" alt="" style="height:130px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,212,255,0.3));opacity:0.85;transform:rotate(-5deg);">
+            <img src="/images/products/capsules.png" alt="" style="height:165px;object-fit:contain;filter:drop-shadow(0 0 25px rgba(155,89,255,0.3));opacity:0.95;">
+            <img src="/images/products/sticks.png" alt="" style="height:130px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,229,204,0.3));opacity:0.85;transform:rotate(5deg);">
+            <img src="/images/products/gum.png" alt="" style="height:130px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,204,136,0.3));opacity:0.85;transform:rotate(-3deg);">
         </div>
     </div>
 </section>

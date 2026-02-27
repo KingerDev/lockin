@@ -469,3 +469,69 @@ if (window.LOCKIN_PRODUCT?.slug === 'sticks') {
             .to({}, { duration: 0.45 });
     })();
 }
+
+/* ══════════════════════════════════════════════════════
+   GUM SHOWCASE — pack-opens pinned animation
+   (only runs on /gum page)
+══════════════════════════════════════════════════════ */
+if (window.LOCKIN_PRODUCT?.slug === 'gum') {
+    (function buildGumShowcase() {
+        const scene = document.getElementById('pd-showcase-scene');
+        if (!scene) return;
+
+        // Mobile: show pack statically, skip pinned animation
+        if (window.innerWidth < 768) {
+            gsap.set('#gu-pack',  { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, y: 0 });
+            gsap.set(['#gu-piece', '.gummy-scroll-hint'], { opacity: 0 });
+            return;
+        }
+
+        // Initial hidden states
+        gsap.set('#gu-pack',           { xPercent: -50, yPercent: -50, opacity: 0, y: 80, scale: 0.85 });
+        gsap.set('#gu-piece',          { xPercent: -50, yPercent: -50, opacity: 0, scale: 0, y: 60 });
+        gsap.set('.ann-line',          { strokeDashoffset: 310 });
+        gsap.set('.ann-dot',           { opacity: 0 });
+        gsap.set('.ann-label',         { opacity: 0, scale: 0.82 });
+        gsap.set('.gummy-header',      { opacity: 0, y: -20 });
+        gsap.set('.gummy-scroll-hint', { opacity: 0 });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#pd-showcase-scene',
+                pin: true,
+                pinSpacing: true,
+                scrub: 1.5,
+                start: 'top top',
+                end: '+=3500',
+            },
+        });
+
+        tl
+            // Phase 1: header + pack enter
+            .to('.gummy-header',      { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' })
+            .to('#gu-pack',           { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out' }, '<+=0.05')
+            .to('.gummy-scroll-hint', { opacity: 1, duration: 0.2 }, '<+=0.15')
+
+            // Phase 2: pack shakes (anticipation)
+            .to('#gu-pack', { rotation: -7, duration: 0.07, ease: 'none' })
+            .to('#gu-pack', { rotation:  8, duration: 0.07, ease: 'none' })
+            .to('#gu-pack', { rotation: -6, duration: 0.07, ease: 'none' })
+            .to('#gu-pack', { rotation:  5, duration: 0.07, ease: 'none' })
+            .to('#gu-pack', { rotation:  0, duration: 0.05, ease: 'none' })
+            .to('.gummy-scroll-hint', { opacity: 0, duration: 0.1 })
+
+            // Phase 3: pack recedes, gum piece pops out
+            .to('#gu-pack',  { y: -45, scale: 0.75, opacity: 0.30, duration: 0.28, ease: 'power2.inOut' })
+            .to('#gu-piece', { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: 'back.out(1.6)' }, '-=0.12')
+
+            // Phase 4: annotation lines draw on
+            .to('.ann-line', { strokeDashoffset: 0, stagger: 0.14, duration: 0.22, ease: 'none' }, '-=0.05')
+            .to('.ann-dot',  { opacity: 1, stagger: 0.14, duration: 0.10 }, '<+=0.08')
+
+            // Phase 5: labels appear
+            .to('.ann-label', { opacity: 1, scale: 1, stagger: 0.12, duration: 0.20, ease: 'power2.out' }, '-=0.25')
+
+            // Hold at end
+            .to({}, { duration: 0.45 });
+    })();
+}

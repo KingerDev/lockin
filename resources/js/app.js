@@ -297,6 +297,18 @@ buildProductTimeline({
     scrollDistance: 3000,
 });
 
+/* ── Focus Gum ───────────────── */
+buildProductTimeline({
+    sceneId:       '#gum-scene',
+    imgId:         '#gum-img',
+    numId:         '#gum-num',
+    titleId:       '#gum-title',
+    subtitleId:    '#gum-subtitle',
+    ingredientsId: '#gum-ingredients',
+    ctaId:         '#gum-cta',
+    scrollDistance: 3000,
+});
+
 /* ══════════════════════════════════════════════════════
    BENEFITS — stagger cards
 ══════════════════════════════════════════════════════ */
