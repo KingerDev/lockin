@@ -119,18 +119,31 @@ if (pdInfo && pdImgWrap) {
 }
 
 /* ══════════════════════════════════════════════════════
+   MOBILE HELPERS — smaller offsets + earlier triggers
+══════════════════════════════════════════════════════ */
+const isMob = window.innerWidth < 768;
+const m = {
+    y:    isMob ? 25  : 50,
+    xOff: isMob ? 25  : 60,
+    dur:  isMob ? 0.5 : 0.8,
+    stag: isMob ? 0.08 : 0.15,
+    s85:  isMob ? 'top 95%' : 'top 85%',
+    s88:  isMob ? 'top 97%' : 'top 88%',
+};
+
+/* ══════════════════════════════════════════════════════
    SCROLL REVEAL — generic fade-up
 ══════════════════════════════════════════════════════ */
 gsap.utils.toArray('.reveal-up').forEach((el) => {
     gsap.fromTo(el,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: m.y },
         {
             opacity: 1, y: 0,
-            duration: 0.85,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: el,
-                start: 'top 88%',
+                start: m.s88,
                 once: true,
             },
         }
@@ -143,15 +156,15 @@ gsap.utils.toArray('.reveal-up').forEach((el) => {
 const ingredientPanels = gsap.utils.toArray('.pd-ingredient-panel');
 if (ingredientPanels.length) {
     gsap.fromTo(ingredientPanels,
-        { opacity: 0, x: 60 },
+        { opacity: 0, x: m.xOff },
         {
             opacity: 1, x: 0,
-            stagger: 0.18,
-            duration: 0.75,
+            stagger: isMob ? 0.09 : 0.18,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.pd-ingredients-stack',
-                start: 'top 85%',
+                start: m.s85,
                 once: true,
             },
         }
@@ -164,15 +177,15 @@ if (ingredientPanels.length) {
 const benefitCards = gsap.utils.toArray('.pd-benefit-card');
 if (benefitCards.length) {
     gsap.fromTo(benefitCards,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: m.y },
         {
             opacity: 1, y: 0,
-            stagger: 0.15,
-            duration: 0.8,
+            stagger: m.stag,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.pd-benefits-grid',
-                start: 'top 85%',
+                start: m.s85,
                 once: true,
             },
         }
@@ -185,15 +198,15 @@ if (benefitCards.length) {
 const reviewCards = gsap.utils.toArray('.pd-review-card');
 if (reviewCards.length) {
     gsap.fromTo(reviewCards,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: m.y },
         {
             opacity: 1, y: 0,
-            stagger: 0.12,
-            duration: 0.8,
+            stagger: isMob ? 0.07 : 0.12,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.pd-reviews-grid',
-                start: 'top 85%',
+                start: m.s85,
                 once: true,
             },
         }
@@ -206,15 +219,15 @@ if (reviewCards.length) {
 const crosssellCards = gsap.utils.toArray('.pd-crosssell-card');
 if (crosssellCards.length) {
     gsap.fromTo(crosssellCards,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: isMob ? 20 : 40 },
         {
             opacity: 1, y: 0,
-            stagger: 0.15,
-            duration: 0.8,
+            stagger: m.stag,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.pd-crosssell-grid',
-                start: 'top 88%',
+                start: m.s88,
                 once: true,
             },
         }

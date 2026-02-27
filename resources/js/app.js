@@ -117,18 +117,31 @@ heroTl
     .fromTo('#scroll-indicator', { opacity: 0 }, { opacity: 1, duration: 0.8 },        'start+=1.2');
 
 /* ══════════════════════════════════════════════════════
+   MOBILE HELPERS — smaller offsets + earlier triggers
+══════════════════════════════════════════════════════ */
+const isMob = window.innerWidth < 768;
+const m = {
+    y:    isMob ? 25  : 60,
+    yHi:  isMob ? 35  : 80,
+    dur:  isMob ? 0.5 : 0.85,
+    stag: isMob ? 0.07 : 0.15,
+    s85:  isMob ? 'top 95%' : 'top 85%',
+    s88:  isMob ? 'top 97%' : 'top 88%',
+};
+
+/* ══════════════════════════════════════════════════════
    SCROLL REVEAL — generic fade-up for sections
 ══════════════════════════════════════════════════════ */
 gsap.utils.toArray('.reveal-up').forEach((el) => {
     gsap.fromTo(el,
-        { opacity: 0, y: 60 },
+        { opacity: 0, y: m.y },
         {
             opacity: 1, y: 0,
-            duration: 0.9,
+            duration: m.dur,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: el,
-                start: 'top 88%',
+                start: m.s88,
                 once: true,
             },
         }
@@ -139,15 +152,15 @@ gsap.utils.toArray('.reveal-up').forEach((el) => {
    PRODUCTS GRID — stagger cards
 ══════════════════════════════════════════════════════ */
 gsap.fromTo('.products-grid .product-thumb',
-    { opacity: 0, y: 80, scale: 0.95 },
+    { opacity: 0, y: m.yHi, scale: isMob ? 0.97 : 0.95 },
     {
         opacity: 1, y: 0, scale: 1,
-        stagger: 0.15,
-        duration: 0.8,
+        stagger: m.stag,
+        duration: m.dur,
         ease: 'power3.out',
         scrollTrigger: {
             trigger: '.products-grid',
-            start: 'top 85%',
+            start: m.s85,
             once: true,
         },
     }
@@ -257,30 +270,30 @@ buildProductTimeline({
    BENEFITS — stagger cards
 ══════════════════════════════════════════════════════ */
 gsap.fromTo('.benefits-grid .benefit-card',
-    { opacity: 0, y: 60, scale: 0.96 },
+    { opacity: 0, y: m.y, scale: isMob ? 0.98 : 0.96 },
     {
         opacity: 1, y: 0, scale: 1,
-        stagger: 0.15,
-        duration: 0.8,
+        stagger: m.stag,
+        duration: m.dur,
         ease: 'power3.out',
         scrollTrigger: {
             trigger: '.benefits-grid',
-            start: 'top 85%',
+            start: m.s85,
             once: true,
         },
     }
 );
 
 gsap.fromTo('.stats-grid > div',
-    { opacity: 0, y: 40 },
+    { opacity: 0, y: isMob ? 20 : 40 },
     {
         opacity: 1, y: 0,
-        stagger: 0.1,
-        duration: 0.6,
+        stagger: isMob ? 0.06 : 0.1,
+        duration: isMob ? 0.45 : 0.6,
         ease: 'power3.out',
         scrollTrigger: {
             trigger: '.stats-grid',
-            start: 'top 88%',
+            start: m.s88,
             once: true,
         },
     }
@@ -290,15 +303,15 @@ gsap.fromTo('.stats-grid > div',
    REVIEWS — stagger cards
 ══════════════════════════════════════════════════════ */
 gsap.fromTo('.reviews-grid .review-card',
-    { opacity: 0, y: 60 },
+    { opacity: 0, y: m.y },
     {
         opacity: 1, y: 0,
-        stagger: 0.1,
-        duration: 0.8,
+        stagger: isMob ? 0.06 : 0.1,
+        duration: m.dur,
         ease: 'power3.out',
         scrollTrigger: {
             trigger: '.reviews-grid',
-            start: 'top 85%',
+            start: m.s85,
             once: true,
         },
     }
@@ -310,27 +323,29 @@ gsap.fromTo('.reviews-grid .review-card',
 const ctaProducts = document.querySelectorAll('.cta-products img');
 if (ctaProducts.length) {
     gsap.from(ctaProducts, {
-        opacity: 0, y: 80, scale: 0.85,
-        stagger: 0.15,
-        duration: 1,
+        opacity: 0, y: m.yHi, scale: isMob ? 0.9 : 0.85,
+        stagger: m.stag,
+        duration: isMob ? 0.55 : 1,
         ease: 'back.out(1.5)',
         scrollTrigger: {
             trigger: '.cta-products',
-            start: 'top 88%',
+            start: m.s88,
         },
     });
 
-    // Gentle floating animation after reveal
-    ctaProducts.forEach((img, i) => {
-        gsap.to(img, {
-            y: i === 1 ? -12 : -8,
-            duration: 2.5 + i * 0.5,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-            delay: i * 0.4,
+    // Gentle floating animation after reveal (skip on mobile for perf)
+    if (!isMob) {
+        ctaProducts.forEach((img, i) => {
+            gsap.to(img, {
+                y: i === 1 ? -12 : -8,
+                duration: 2.5 + i * 0.5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                delay: i * 0.4,
+            });
         });
-    });
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -341,11 +356,11 @@ gsap.utils.toArray('.neon-divider').forEach((el) => {
         { opacity: 0, scaleX: 0, transformOrigin: 'left center' },
         {
             opacity: 1, scaleX: 1,
-            duration: 1.2,
+            duration: isMob ? 0.7 : 1.2,
             ease: 'power3.inOut',
             scrollTrigger: {
                 trigger: el,
-                start: 'top 95%',
+                start: isMob ? 'top 99%' : 'top 95%',
                 once: true,
             },
         }
