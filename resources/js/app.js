@@ -6,7 +6,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ══════════════════════════════════════════════════════
-   SMOOTH SCROLL — Lenis + GSAP ticker integration
+   MOBILE DETECTION — defined first so all code can branch
+══════════════════════════════════════════════════════ */
+const isMob = window.innerWidth < 768;
+
+/* ══════════════════════════════════════════════════════
+   SMOOTH SCROLL — Lenis + GSAP ticker (desktop only)
+   On mobile, native iOS/Android scroll is already smooth.
+   Running Lenis RAF on every frame adds unnecessary CPU/GPU
+   overhead that causes jank, so we skip it on touch devices.
 ══════════════════════════════════════════════════════ */
 const lenis = new Lenis({
     duration: 1.2,
@@ -14,24 +22,34 @@ const lenis = new Lenis({
     smoothWheel: true,
 });
 
-lenis.on('scroll', ScrollTrigger.update);
-
-gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-});
+if (!isMob) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+}
 
 gsap.ticker.lagSmoothing(0);
+
+// ScrollTrigger native scroll listener — keeps ST in sync on iOS Safari
+// where Lenis doesn't intercept touch-momentum scroll events.
+window.addEventListener('scroll', ScrollTrigger.update, { passive: true });
 
 /* ══════════════════════════════════════════════════════
    PARTICLE CANVAS — neural network background
 ══════════════════════════════════════════════════════ */
 (function initCanvas() {
+    // Skip entirely on mobile — O(n²) particle connection loop is too heavy
+    // for iOS GPU and causes scroll jank. Orbs + CSS gradients handle the
+    // background ambience on mobile instead.
+    if (isMob) return;
+
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const particles = [];
-    const NUM = window.innerWidth < 768 ? 40 : 80;
+    const NUM = 80;
     const MAX_DIST = 140;
 
     function resize() {
@@ -107,26 +125,39 @@ if (navbar) {
 ══════════════════════════════════════════════════════ */
 const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-heroTl
-    .to('#hero-icon',      { opacity: 1, y: 0, duration: 1,    delay: 0.2 }, 'start')
-    .fromTo('#hero-icon',  { y: 40 }, { y: 0, duration: 1 },                 'start')
-    .fromTo('#hero-title', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9 }, 'start+=0.3')
-    .fromTo('#hero-tagline',{ opacity: 0, y: 30 },{ opacity: 1, y: 0, duration: 0.7 }, 'start+=0.55')
-    .fromTo('#hero-desc',  { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.7 }, 'start+=0.7')
-    .fromTo('#hero-ctas',  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, 'start+=0.85')
-    .fromTo('#scroll-indicator', { opacity: 0 }, { opacity: 1, duration: 0.8 },        'start+=1.2');
+if (isMob) {
+    // Mobile: no initial delay, smaller offsets, ~half duration
+    heroTl
+        .to('#hero-icon',            { opacity: 1, y: 0, duration: 0.5 },                           'start')
+        .fromTo('#hero-icon',        { y: 20 }, { y: 0, duration: 0.5 },                            'start')
+        .fromTo('#hero-title',       { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.45 }, 'start+=0.15')
+        .fromTo('#hero-tagline',     { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35 }, 'start+=0.25')
+        .fromTo('#hero-desc',        { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, 'start+=0.35')
+        .fromTo('#hero-ctas',        { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 'start+=0.45')
+        .fromTo('#scroll-indicator', { opacity: 0 }, { opacity: 1, duration: 0.25 },              'start+=0.6');
+} else {
+    heroTl
+        .to('#hero-icon',            { opacity: 1, y: 0, duration: 1,    delay: 0.2 }, 'start')
+        .fromTo('#hero-icon',        { y: 40 }, { y: 0, duration: 1 },                 'start')
+        .fromTo('#hero-title',       { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9 }, 'start+=0.3')
+        .fromTo('#hero-tagline',     { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7 }, 'start+=0.55')
+        .fromTo('#hero-desc',        { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.7 }, 'start+=0.7')
+        .fromTo('#hero-ctas',        { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, 'start+=0.85')
+        .fromTo('#scroll-indicator', { opacity: 0 }, { opacity: 1, duration: 0.8 },              'start+=1.2');
+}
 
 /* ══════════════════════════════════════════════════════
-   MOBILE HELPERS — smaller offsets + earlier triggers
+   SCROLL ANIMATION CONFIG
 ══════════════════════════════════════════════════════ */
-const isMob = window.innerWidth < 768;
+// On mobile: 'top bottom' fires the instant an element enters from below —
+// animation is already running by the time it becomes visible.
 const m = {
-    y:    isMob ? 25  : 60,
-    yHi:  isMob ? 35  : 80,
-    dur:  isMob ? 0.5 : 0.85,
+    y:    isMob ? 22  : 60,
+    yHi:  isMob ? 28  : 80,
+    dur:  isMob ? 0.45 : 0.85,
     stag: isMob ? 0.07 : 0.15,
-    s85:  isMob ? 'top 95%' : 'top 85%',
-    s88:  isMob ? 'top 97%' : 'top 88%',
+    s85:  isMob ? 'top bottom' : 'top 85%',
+    s88:  isMob ? 'top bottom' : 'top 88%',
 };
 
 /* ══════════════════════════════════════════════════════

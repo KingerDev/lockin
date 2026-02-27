@@ -6,7 +6,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ══════════════════════════════════════════════════════
-   SMOOTH SCROLL — Lenis + GSAP ticker
+   MOBILE DETECTION — defined first so all code can branch
+══════════════════════════════════════════════════════ */
+const isMob = window.innerWidth < 768;
+
+/* ══════════════════════════════════════════════════════
+   SMOOTH SCROLL — Lenis + GSAP ticker (desktop only)
+   On mobile, native iOS/Android scroll is already smooth.
+   Running Lenis RAF on every frame adds unnecessary CPU/GPU
+   overhead that causes jank, so we skip it on touch devices.
 ══════════════════════════════════════════════════════ */
 const lenis = new Lenis({
     duration: 1.2,
@@ -14,24 +22,33 @@ const lenis = new Lenis({
     smoothWheel: true,
 });
 
-lenis.on('scroll', ScrollTrigger.update);
-
-gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-});
+if (!isMob) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+}
 
 gsap.ticker.lagSmoothing(0);
+
+// ScrollTrigger native scroll listener — keeps ST in sync on iOS Safari
+// where Lenis doesn't intercept touch-momentum scroll events.
+window.addEventListener('scroll', ScrollTrigger.update, { passive: true });
 
 /* ══════════════════════════════════════════════════════
    PARTICLE CANVAS — neural network background
 ══════════════════════════════════════════════════════ */
 (function initCanvas() {
+    // Skip entirely on mobile — O(n²) particle connection loop is too heavy
+    // for iOS GPU and causes scroll jank. Product hero orbs handle the ambience.
+    if (isMob) return;
+
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const particles = [];
-    const NUM = window.innerWidth < 768 ? 30 : 60;
+    const NUM = 60;
     const MAX_DIST = 130;
 
     // Pick accent colour from product data if available
@@ -112,23 +129,30 @@ const pdScroll  = document.getElementById('pd-scroll');
 if (pdInfo && pdImgWrap) {
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    heroTl
-        .to(pdImgWrap, { opacity: 1, y: 0, scale: 1, duration: 1.1, delay: 0.15 }, 'start')
-        .to(pdInfo,    { opacity: 1, y: 0, duration: 0.9 }, 'start+=0.25')
-        .to(pdScroll,  { opacity: 1, duration: 0.6 }, 'start+=1.0');
+    if (isMob) {
+        // Mobile: no initial delay, ~half durations — hero appears immediately
+        heroTl
+            .to(pdImgWrap, { opacity: 1, y: 0, scale: 1, duration: 0.55 }, 'start')
+            .to(pdInfo,    { opacity: 1, y: 0, duration: 0.45 }, 'start+=0.12')
+            .to(pdScroll,  { opacity: 1, duration: 0.3 }, 'start+=0.3');
+    } else {
+        heroTl
+            .to(pdImgWrap, { opacity: 1, y: 0, scale: 1, duration: 1.1, delay: 0.15 }, 'start')
+            .to(pdInfo,    { opacity: 1, y: 0, duration: 0.9 }, 'start+=0.25')
+            .to(pdScroll,  { opacity: 1, duration: 0.6 }, 'start+=1.0');
+    }
 }
 
 /* ══════════════════════════════════════════════════════
    MOBILE HELPERS — smaller offsets + earlier triggers
 ══════════════════════════════════════════════════════ */
-const isMob = window.innerWidth < 768;
 const m = {
     y:    isMob ? 25  : 50,
     xOff: isMob ? 25  : 60,
     dur:  isMob ? 0.5 : 0.8,
     stag: isMob ? 0.08 : 0.15,
-    s85:  isMob ? 'top 95%' : 'top 85%',
-    s88:  isMob ? 'top 97%' : 'top 88%',
+    s85:  isMob ? 'top bottom' : 'top 85%',
+    s88:  isMob ? 'top bottom' : 'top 88%',
 };
 
 /* ══════════════════════════════════════════════════════
